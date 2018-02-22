@@ -10,48 +10,40 @@ const STEPS = [
     text: "🐰 Selecione o ovo",
     items: [
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/egg_dark.png",
+        image: require("./assets/egg_dark.png"),
         text: "Chocolate escuro"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/egg_white.png",
+        image: require("./assets/egg_white.png"),
         text: "Chocolate branco"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/egg_oreo.png",
+        image: require("./assets/egg_oreo.png"),
         text: "Chocolate de Oreo"
       }
     ]
   },
   {
-    text: "🍬 Selecione creme",
+    text: "🍫 Selecione creme",
     items: [
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/nutella.png",
+        image: require("./assets/nutella.png"),
         text: "Nutella"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/leite_condensado.png",
+        image: require("./assets/leite_condensado.png"),
         text: "Leite de condensado"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/white_chocolate.png",
+        image: require("./assets/white_chocolate.png"),
         text: "Chocolate branco"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/oreo.png",
+        image: require("./assets/oreo.png"),
         text: "Oreo"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/white_cream.png",
+        image: require("./assets/white_cream.png"),
         text: "Creme branco"
       }
     ]
@@ -60,78 +52,66 @@ const STEPS = [
     text: "🍓 Selecione cobertura",
     items: [
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_strawberries.png",
+        image: require("./assets/topping_strawberries.png"),
         text: "Morangos"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_mms.png",
+        image: require("./assets/topping_mms.png"),
         text: "M&Ms"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_oreo.png",
+        image: require("./assets/topping_oreo.png"),
         text: "Oreo"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_blueberries.png",
+        image: require("./assets/topping_blueberries.png"),
         text: "Amoras"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_banana.png",
+        image: require("./assets/topping_banana.png"),
         text: "Banana"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_candies.png",
+        image: require("./assets/topping_candies.png"),
         text: "Doces"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_bears.png",
+        image: require("./assets/topping_bears.png"),
         text: "Ursos gomosos"
       },
       {
         image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_love.png",
+          require("./assets/topping_love.png"),
         text: "Amor doces"
       },
       {
         image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/none.png",
+          require("./assets/none.png"),
         text: "Nenhum"
       }
     ]
   },
   {
-    text: "🍨 Selecione cobertura",
+    text: "🍩 Selecione cobertura",
     items: [
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/final_1.png",
-        text: "Chocolate escuro"
-      },
-      {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/final_2.png",
+        image: require("./assets/final_2.png"),
         text: "Granulados 1"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/final_3.png",
+        image:require("./assets/final_3.png"),
         text: "Granulados 2"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/final_4.png",
+        image: require("./assets/final_4.png"),
         text: "Kit Kat"
       },
       {
-        image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/none.png",
+        image: require("./assets/final_1.png"),
+        text: "Chocolate escuro"
+      },
+      {
+        image: require("./assets/none.png"),
         text: "Nenhum"
       }
     ]
@@ -206,10 +186,10 @@ class App extends React.Component {
       <div className="container">
         <h2>{STEPS[step].text}</h2>
         <div className="imagesContainer">
-          <div className="imageBig">
+          <div className="image">
             <img
-              className="bgImage"
-              src="https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/box_bg.png"
+              className="bgImageBig"
+              src={require("./assets/box_bg.png")}
             />
           </div>
           {selected.map(item => {
@@ -230,12 +210,13 @@ class App extends React.Component {
                   infiniteLoop={false}
                   showArrows
                   showStatus={false}
-                  width={300}
+                  emulateTouch
+                  width={'75vw'}
                 >
                   {data.items.map(item => {
                     return (
                       <div key={item.image}>
-                        <img src={item.image} />
+                        <img src={item.image} className='bgImage' />
                         <p className="cutomLegend">{item.text}</p>
                       </div>
                     );
