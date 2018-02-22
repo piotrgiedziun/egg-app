@@ -180,9 +180,9 @@ class App extends React.Component {
     const selected = [...this.state.selected, openItem];
 
     const text = encodeURIComponent(
-      "Hello! I would like to order: " + selected.map(x => x.text).join(", ")
+      "Oi! Eu gostaria de ter: " + selected.map(x => x.text).join(", ")
     );
-    const url = `https://api.whatsapp.com/send?phone=+48729161709&text=${text}`;
+    const url = `https://api.whatsapp.com/send?phone=+5514996056596&text=${text}`;
     window.location = url;
   }
   renderNextOrFinalize() {
