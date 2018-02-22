@@ -1,12 +1,14 @@
 .container {
   text-align: center;
 }
-.center {
-  margin: 0 auto;
-  width: 300px;
+.carousel {
+  margin: 0 auto !important;
 }
 .imagesContainer {
   position: relative;
+}
+.imageBig {
+  height: 400px;
 }
 .image {
   position: absolute;
@@ -20,4 +22,39 @@
 }
 .carousel .slide {
   background-color: transparent;
+}
+.cutomLegend {
+  position: absolute;
+  opacity: 0.8;
+  top: -10px;
+  width: 70%;
+  margin-left: 15%;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+body {
+  background-color: white;
+  color: black;
+  font-family: "Roboto", sans-serif;
+}
+.button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.button4 {
+  background-color: #e7e7e7;
+  color: black;
+}
+
+.button4[disabled] {
+  background-color: #f3f3f3;
+  color: gray;
 }
