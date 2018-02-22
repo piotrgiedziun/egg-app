@@ -7,27 +7,27 @@ import "./index.css";
 
 const STEPS = [
   {
-    text: "🐰 Select the egg",
+    text: "🐰 Selecione o ovo",
     items: [
       {
         image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/egg_dark.png",
-        text: "Dark chocolate"
+          require("../assets/egg_dark.png"),
+        text: "Chocolate escuro"
       },
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/egg_white.png",
-        text: "White chocolate"
+        text: "Chocolate branco"
       },
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/egg_oreo.png",
-        text: "Chocolate of Oreo"
+        text: "Chocolate de Oreo"
       }
     ]
   },
   {
-    text: "🍬 Select dressing",
+    text: "🍬 Selecione creme",
     items: [
       {
         image:
@@ -37,12 +37,12 @@ const STEPS = [
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/leite_condensado.png",
-        text: "Leite condensado"
+        text: "Leite de condensado"
       },
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/white_chocolate.png",
-        text: "White chocolate"
+        text: "Chocolate branco"
       },
       {
         image:
@@ -52,17 +52,17 @@ const STEPS = [
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/white_cream.png",
-        text: "White cream"
+        text: "Creme branco"
       }
     ]
   },
   {
-    text: "🍓 Select next",
+    text: "🍓 Selecione cobertura",
     items: [
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_strawberries.png",
-        text: "Strawberries"
+        text: "Morangos"
       },
       {
         image:
@@ -77,7 +77,7 @@ const STEPS = [
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_blueberries.png",
-        text: "Blueberries"
+        text: "Amoras"
       },
       {
         image:
@@ -87,42 +87,42 @@ const STEPS = [
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_candies.png",
-        text: "Candies"
+        text: "Doces"
       },
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_bears.png",
-        text: "Gummy bears"
+        text: "Ursos gomosos"
       },
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/topping_love.png",
-        text: "Love candies"
+        text: "Amor doces"
       },
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/none.png",
-        text: "None"
+        text: "Nenhum"
       }
     ]
   },
   {
-    text: "🍨 Select topping",
+    text: "🍨 Selecione cobertura",
     items: [
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/final_1.png",
-        text: "Dark chocolate"
+        text: "Chocolate escuro"
       },
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/final_2.png",
-        text: "Sprinkles 1"
+        text: "Granulados 1"
       },
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/final_3.png",
-        text: "Sprinkles 2"
+        text: "Granulados 2"
       },
       {
         image:
@@ -132,7 +132,7 @@ const STEPS = [
       {
         image:
           "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/none.png",
-        text: "None"
+        text: "Nenhum"
       }
     ]
   }
@@ -148,6 +148,7 @@ class App extends React.Component {
     super(props);
     this.onNext = this.onNext.bind(this);
     this.onBack = this.onBack.bind(this);
+    this.onFinish = this.onFinish.bind(this);
   }
   onBack() {
     const openImage =
@@ -173,22 +174,29 @@ class App extends React.Component {
       };
     });
   }
+  onFinish() {
+    const openItem =
+      STEPS[this.state.step].items[this.carousel.state.selectedItem];
+    const selected = [...this.state.selected, openItem];
+
+    const text = encodeURIComponent(
+      "Hello! I would like to order: " + selected.map(x => x.text).join(", ")
+    );
+    const url = `https://api.whatsapp.com/send?phone=+48729161709&text=${text}`;
+    window.location = url;
+  }
   renderNextOrFinalize() {
-    const { step, selected } = this.state;
+    const { step } = this.state;
     if (step === STEPS.length - 1) {
-      const text = encodeURIComponent(
-        "Hello! I would like to order: " + selected.map(x => x.text).join(", ")
-      );
-      const url = `https://api.whatsapp.com/send?phone=+48729161709&text=${text}`;
       return (
-        <a href={url} className="button">
-          Text on WhatsApp
-        </a>
+        <button onClick={this.onFinish} className="button">
+          Enviar no WhatsApp
+        </button>
       );
     }
     return (
       <button className="button" onClick={this.onNext}>
-        Next
+        Continuar
       </button>
     );
   }
@@ -240,7 +248,7 @@ class App extends React.Component {
               onClick={this.onBack}
               disabled={step === 0}
             >
-              Back
+              Costas
             </button>
             <span> </span>
             {this.renderNextOrFinalize()}
