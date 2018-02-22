@@ -11,7 +11,7 @@ const STEPS = [
     items: [
       {
         image:
-          "https://raw.githubusercontent.com/piotrgiedziun/egg-app/master/assets/egg_dark.png",
+          require("../assets/egg_dark.png"),
         text: "Chocolate escuro"
       },
       {
