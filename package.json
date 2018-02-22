@@ -1,9 +1,9 @@
 {
-  "name": "new",
+  "name": "eggapp",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
-  "homepage": "https://codesandbox.io/s/new",
+  "homepage": "https://piotrgiedziun.github.io/egg-app/",
   "main": "src/index.js",
   "dependencies": {
     "react": "16.2.0",
