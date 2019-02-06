@@ -52,6 +52,11 @@ const STEPS = [
     text: "🍓 Selecione cobertura",
     items: [
       {
+        image:
+          require("./assets/none.png"),
+        text: "Nenhum"
+      },
+      {
         image: require("./assets/topping_strawberries.png"),
         text: "Morangos"
       },
@@ -83,17 +88,16 @@ const STEPS = [
         image:
           require("./assets/topping_love.png"),
         text: "Amor doces"
-      },
-      {
-        image:
-          require("./assets/none.png"),
-        text: "Nenhum"
       }
     ]
   },
   {
     text: "🍩 Selecione cobertura",
     items: [
+      {
+        image: require("./assets/none.png"),
+        text: "Nenhum"
+      },
       {
         image: require("./assets/final_2.png"),
         text: "Granulados 1"
@@ -109,10 +113,6 @@ const STEPS = [
       {
         image: require("./assets/final_1.png"),
         text: "Chocolate escuro"
-      },
-      {
-        image: require("./assets/none.png"),
-        text: "Nenhum"
       }
     ]
   }
@@ -131,8 +131,6 @@ class App extends React.Component {
     this.onFinish = this.onFinish.bind(this);
   }
   onBack() {
-    const openImage =
-      STEPS[this.state.step].items[this.carousel.state.selectedItem].image;
     this.setState(prevState => {
       if (prevState.step <= 0) return;
       const selected = prevState.selected.slice();
@@ -162,7 +160,7 @@ class App extends React.Component {
     const text = encodeURIComponent(
       "Oi! Eu gostaria de ter: " + selected.map(x => x.text).join(", ")
     );
-    const url = `https://api.whatsapp.com/send?phone=+5514996056596&text=${text}`;
+    const url = `https://api.whatsapp.com/send?phone=&text=${text}`;
     window.location = url;
   }
   renderNextOrFinalize() {
@@ -189,19 +187,20 @@ class App extends React.Component {
           <div className="image">
             <img
               className="bgImageBig"
+              alt="An egg"
               src={require("./assets/box_bg.png")}
             />
           </div>
           {selected.map(item => {
             return (
               <div className="image">
-                <img className="bgImage" src={item.image} />
+                <img className="bgImage" alt={item.text} src={item.image} />
               </div>
             );
           })}
           <div className="image">
             {STEPS.map((data, key) => {
-              if (key !== step) return;
+              if (key !== step) return null;
               return (
                 <Carousel
                   ref={item => (this.carousel = item)}
@@ -216,7 +215,7 @@ class App extends React.Component {
                   {data.items.map(item => {
                     return (
                       <div key={item.image}>
-                        <img src={item.image} className='bgImage' />
+                        <img src={item.image} className='bgImage' alt={item.text} />
                         <p className="cutomLegend">{item.text}</p>
                       </div>
                     );
